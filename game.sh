@@ -50,5 +50,14 @@ while [ 1 ]
 do
    read -n1 -p "" opcao
    echo $opcao > game.txt
-   n=`cat game.txt`
+   if [ $opcao -eq 0 1> /dev/null 2>&1 ]
+   then
+     ps | grep bash | cut -c1-6 > processos.txt
+     ps | grep game | cut -c1-6 > processos.txt
+     cat processos.txt | while read linha
+     do
+        kill $linha 1> /dev/null 2>&1
+     done
+     break
+   fi
 done
